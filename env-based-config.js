@@ -4,7 +4,13 @@ process.env.RANGES.split(";").map(function(r) {
   var arr = r.split(":", 2);
   var name = arr[0];
   var org_range = arr[1];
-  ranges[name] = org_range.split(",").map(function(r) { return r.split("-"); });
+  ranges[name] = org_range.split(",").map(function(r) { 
+    if (r.match(/-/)) {
+      return r.split("-"); 
+    } else {
+      return r;
+    }
+  });
 });
 
 module.exports = {
